@@ -50,7 +50,7 @@ int main(int argc, char** argv)
 		int m;
 		for (int i = 0; i < k; i++) {
 			cin >> m;
-
+			//耕刃失 しししし
 		}
 		for (int i = 0; i < k; i++) {
 			for (int j = i + 1; j < k; j++) {

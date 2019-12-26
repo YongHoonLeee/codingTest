@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 	cout << ~c << endl;
 	cout << !c << endl;
 
-
+	cout << "commit Test" << endl;
 	getchar();
 	getchar(); return 0;
 }
