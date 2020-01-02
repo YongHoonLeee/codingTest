@@ -19,7 +19,7 @@
 // int a = 0;                            
 // float b = 1.0, c = 2.0;               
 // double d = 3.0, e = 0.0; f = 1.0;
-// char g = 'b';
+// char g = &apos;b&apos;;
 // char var[256] = "ABCDEFG";
 // long long AB = 12345678901234567L;
 // cout << a;                           // int 변수 1개 출력하는 예제
@@ -31,6 +31,8 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
+#include<set>
+#include<vector>
 using namespace std;
 
 int main(int argc, char** argv)
@@ -39,23 +41,38 @@ int main(int argc, char** argv)
 	int T;
 	cin >> T;
 	int k;
-	
+
 	for (test_case = 1; test_case <= T; ++test_case)
 	{
+		multiset<int>s;
+		vector<int>v;
 		cin >> k;
 		int max;
-		int size = k*(k - 1) / 2;
-		int arr[499500];
 		cin >> max;
 		int m;
 		for (int i = 0; i < k; i++) {
 			cin >> m;
-			//미완성 ㅇㅇㅇㅇ
+			v.push_back(m);
 		}
-		for (int i = 0; i < k; i++) {
-			for (int j = i + 1; j < k; j++) {
-		
+		multiset<int>mm;
+		for (int i = 0; i < v.size(); i++)
+			for (int j = i + 1; j < v.size(); ++j)
+				mm.insert(v[i] + v[j]);
+
+		auto init = mm.begin();
+		if (max < *init) {
+			cout << "#" << test_case << " " << -1 << endl;
+			break;
 		}
-	}getchar(); getchar();
+
+		for (auto it = mm.rbegin(); it != mm.rend(); ++it) {
+			if (*it <= max) {
+				cout << "#" << test_case << " " << *it << endl;
+				break;
+			}
+		}
+
+
+	}
 	return 0;//정상종료시 반드시 0을 리턴해야합니다.
 }
