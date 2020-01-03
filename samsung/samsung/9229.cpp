@@ -19,7 +19,7 @@
 // int a = 0;                            
 // float b = 1.0, c = 2.0;               
 // double d = 3.0, e = 0.0; f = 1.0;
-// char g = &apos;b&apos;;
+// char g = 'b';
 // char var[256] = "ABCDEFG";
 // long long AB = 12345678901234567L;
 // cout << a;                           // int 변수 1개 출력하는 예제
@@ -31,48 +31,50 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 #include<iostream>
-#include<set>
+#include<algorithm>
 #include<vector>
+#pragma warning (disable:4996)
 using namespace std;
 
 int main(int argc, char** argv)
 {
 	int test_case;
 	int T;
-	cin >> T;
+	scanf("%d", &T);
 	int k;
 
 	for (test_case = 1; test_case <= T; ++test_case)
 	{
-		multiset<int>s;
+		vector<int>s;
 		vector<int>v;
-		cin >> k;
+		scanf("%d", &k);
+		v.reserve(k);
+		s.reserve(k*(k + 1) / 2);
 		int max;
-		cin >> max;
+		scanf("%d", &max);
 		int m;
 		for (int i = 0; i < k; i++) {
-			cin >> m;
+			scanf("%d", &m);
 			v.push_back(m);
 		}
-		multiset<int>mm;
-		for (int i = 0; i < v.size(); i++)
-			for (int j = i + 1; j < v.size(); ++j)
-				mm.insert(v[i] + v[j]);
-
-		auto init = mm.begin();
-		if (max < *init) {
-			cout << "#" << test_case << " " << -1 << endl;
-			break;
+		int sum = 0;
+		for (int i = 0; i < k; i++) {
+			for (int j = i + 1; j < k; j++) {
+				s.push_back(v[i] + v[j]);
+			}
+		}
+		sort(s.begin(), s.end());
+		if (*s.begin() > max) {
+			printf("#%d -1\n", test_case);
+			continue;
 		}
 
-		for (auto it = mm.rbegin(); it != mm.rend(); ++it) {
-			if (*it <= max) {
-				cout << "#" << test_case << " " << *it << endl;
+		for (auto iter = s.rbegin(); iter != s.rend(); iter++) {
+			if (max >= *iter) {
+				printf("#%d %d\n", test_case, *iter);
 				break;
 			}
 		}
-
-
 	}
 	return 0;//정상종료시 반드시 0을 리턴해야합니다.
 }
