@@ -1,80 +1,49 @@
-/////////////////////////////////////////////////////////////////////////////////////////////
-// 기본 제공코드는 임의 수정해도 관계 없습니다. 단, 입출력 포맷 주의
-// 아래 표준 입출력 예제 필요시 참고하세요.
-// 표준 입력 예제
-// int a;
-// float b, c;
-// double d, e, f;
-// char g;
-// char var[256];
-// long long AB;
-// cin >> a;                            // int 변수 1개 입력받는 예제
-// cin >> b >> c;                       // float 변수 2개 입력받는 예제 
-// cin >> d >> e >> f;                  // double 변수 3개 입력받는 예제
-// cin >> g;                            // char 변수 1개 입력받는 예제
-// cin >> var;                          // 문자열 1개 입력받는 예제
-// cin >> AB;                           // long long 변수 1개 입력받는 예제
-/////////////////////////////////////////////////////////////////////////////////////////////
-// 표준 출력 예제
-// int a = 0;                            
-// float b = 1.0, c = 2.0;               
-// double d = 3.0, e = 0.0; f = 1.0;
-// char g = 'b';
-// char var[256] = "ABCDEFG";
-// long long AB = 12345678901234567L;
-// cout << a;                           // int 변수 1개 출력하는 예제
-// cout << b << " " << c;               // float 변수 2개 출력하는 예제
-// cout << d << " " << e << " " << f;   // double 변수 3개 출력하는 예제
-// cout << g;                           // char 변수 1개 출력하는 예제
-// cout << var;                         // 문자열 1개 출력하는 예제
-// cout << AB;                          // long long 변수 1개 출력하는 예제
-/////////////////////////////////////////////////////////////////////////////////////////////
-
 #include<iostream>
 #include<algorithm>
-#include<vector>
-#pragma warning (disable:4996)
 using namespace std;
+int solve(int *ARR, int MAX, int SIZE)
+{
+	int ret = 0, temp;
+	for (int i = 0; i < SIZE; i++)
+	{
+		for (int j = SIZE - 1; j>i; j--)
+		{
+			if (ARR[i] + ARR[j] <= MAX) {
+				temp = ARR[i] + ARR[j];
+				if (temp>ret)
+					ret = temp;
+				if (ret == MAX) {
+					return ret;
+				}
+			}
+		}
+	}
+	if (ret == 0)
+		return -1;
+	else
+		return ret;
 
+}
 int main(int argc, char** argv)
 {
+	cin.tie(NULL);
+	cout.tie(NULL);
+	ios_base::sync_with_stdio(false);
+
 	int test_case;
 	int T;
-	scanf("%d", &T);
-	int k;
-
+	cin >> T;
+	int N, M;
 	for (test_case = 1; test_case <= T; ++test_case)
 	{
-		vector<int>s;
-		vector<int>v;
-		scanf("%d", &k);
-		v.reserve(k);
-		s.reserve(k*(k + 1) / 2);
-		int max;
-		scanf("%d", &max);
-		int m;
-		for (int i = 0; i < k; i++) {
-			scanf("%d", &m);
-			v.push_back(m);
+		cin >> N >> M;
+		int *arr = new int[N];//n개 짜리 배열 만들기.
+		int e;
+		for (int i = 0; i < N; i++) {
+			cin >> e;
+			arr[i] = e;
 		}
-		int sum = 0;
-		for (int i = 0; i < k; i++) {
-			for (int j = i + 1; j < k; j++) {
-				s.push_back(v[i] + v[j]);
-			}
-		}
-		sort(s.begin(), s.end());
-		if (*s.begin() > max) {
-			printf("#%d -1\n", test_case);
-			continue;
-		}
-
-		for (auto iter = s.rbegin(); iter != s.rend(); iter++) {
-			if (max >= *iter) {
-				printf("#%d %d\n", test_case, *iter);
-				break;
-			}
-		}
+		cout << "#" << test_case << " " << solve(arr, M, N) << endl;
 	}
 	return 0;//정상종료시 반드시 0을 리턴해야합니다.
 }
