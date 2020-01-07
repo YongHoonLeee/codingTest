@@ -49,3 +49,6 @@ int main(int argc, char** argv)
 	}
 	return 0;
 }
+
+//재귀함수를 통한 0~N까지 부분합으로 풀었다.
+//감동.
