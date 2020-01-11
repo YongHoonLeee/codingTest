@@ -3,7 +3,7 @@
 #include<iostream>
 #include<algorithm>     //ing...
 using namespace std;
-int chk(vector<int> arr) {
+int chkall(vector<int> arr) {
 	int chk = 0;
 	for (auto i : arr) {
 		if (i < 10)
@@ -17,8 +17,10 @@ int chk(vector<int> arr) {
 	}
 	return chk;
 }
-int c(int i) {
-	if (i < 10)
+int chk(int i) {
+	if (i == 0)
+		return 0;
+	else if (i < 10)
 		return 1;
 	else if (10 <= i&&i < 100)
 		return 2;
@@ -30,16 +32,13 @@ int c(int i) {
 string solution(vector<int> numbers) {
 	string answer = "";
 	vector<string> iToc;
-	//iToc.reserve(numbers.size());
-	/*for (int i = 0; i < numbers.size(); i++)
-		iToc.push_back(to_string( numbers[i]));*/
-	//int chknum = chk(numbers);
 	vector<int> temp;
 	temp.reserve(numbers.size());
 	for (int i = 0; i < numbers.size(); i++)
-		temp.push_back(numbers[i] * pow(10, 4 - c(numbers[i])));
+		temp.push_back(numbers[i] * pow(10, 4 - chk(numbers[i])));
 
-	sort(temp.begin(), temp.end());
+//다 1000 단위로 만들어서 비교해본다. 하지만 자리수가 적은걸 우선배치한다.
+	for()
 	
 	 
 	return answer;
